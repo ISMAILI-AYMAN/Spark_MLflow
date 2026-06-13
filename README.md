@@ -134,6 +134,10 @@ More queries in [analytics/sql/](analytics/sql/).
 └── docs/                         # Architecture, setup, insights
 ```
 
+## Legacy Spark notebook
+
+The original [Spark + MLflow K-Means clustering notebook](spark+mlflow%20(1).ipynb) is preserved for reference. The current platform supersedes it with a production-style medallion pipeline, BI dashboards, and churn classification.
+
 ## Notes
 
 - PostgreSQL runs on **port 5433** (avoids conflict with local Postgres on 5432)
