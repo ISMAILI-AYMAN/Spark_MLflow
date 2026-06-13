@@ -10,7 +10,6 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 PROJECT_ROOT = os.environ.get("OLIST_PROJECT_ROOT", "/opt/olist")
-DBT_DIR = os.path.join(PROJECT_ROOT, "dbt")
 
 
 def load_bronze_task() -> None:
@@ -40,6 +39,14 @@ default_args = {
     "retry_delay": timedelta(minutes=5),
 }
 
+dbt_env = (
+    f"export POSTGRES_HOST={os.environ.get('POSTGRES_HOST', 'olist-postgres')} "
+    f"POSTGRES_PORT={os.environ.get('POSTGRES_PORT', '5432')} "
+    f"POSTGRES_DB={os.environ.get('POSTGRES_DB', 'olist')} "
+    f"POSTGRES_USER={os.environ.get('POSTGRES_USER', 'olist')} "
+    f"POSTGRES_PASSWORD={os.environ.get('POSTGRES_PASSWORD', 'olist_secret')}"
+)
+
 with DAG(
     dag_id="olist_daily_refresh",
     default_args=default_args,
@@ -56,12 +63,12 @@ with DAG(
 
     dbt_run = BashOperator(
         task_id="dbt_run",
-        bash_command=f"cd {DBT_DIR} && dbt run --profiles-dir .",
+        bash_command=f"{dbt_env} && cd {PROJECT_ROOT}/dbt && dbt run --profiles-dir .",
     )
 
     dbt_test = BashOperator(
         task_id="dbt_test",
-        bash_command=f"cd {DBT_DIR} && dbt test --profiles-dir .",
+        bash_command=f"{dbt_env} && cd {PROJECT_ROOT}/dbt && dbt test --profiles-dir .",
     )
 
     train_churn = PythonOperator(

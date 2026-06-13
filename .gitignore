@@ -34,7 +34,7 @@ airflow/airflow.db
 .DS_Store
 Thumbs.db
 
-# Power BI (large files — commit screenshots only)
+# Power BI (binary reports — commit screenshots + data/ CSVs instead)
 dashboard/powerbi/*.pbix
 
 # Jupyter

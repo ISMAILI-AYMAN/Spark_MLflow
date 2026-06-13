@@ -28,6 +28,7 @@ def main() -> None:
 
     train_churn()
     print("\nPipeline complete.")
+    print("Optional: python scripts/export_powerbi_csvs.py")
 
 
 if __name__ == "__main__":

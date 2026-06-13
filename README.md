@@ -56,11 +56,11 @@ pip install -r requirements.txt
 # 5. Build dbt Docker image (dbt requires Python ≤3.12; run via Docker)
 docker build -t olist-dbt -f dbt/Dockerfile .
 
-# 6. Run full pipeline
-python ingestion/load_bronze.py
-python scripts/run_dbt.py run
-python scripts/run_dbt.py test
-python ml/train_churn.py
+# 6. Run full pipeline (primary orchestrator)
+python scripts/run_pipeline.py
+
+# Optional: Airflow scheduling UI → docs/orchestration.md
+# docker compose --profile airflow up -d   # http://localhost:8080
 
 # 7. Dashboard
 streamlit run dashboard/streamlit/app.py
@@ -68,6 +68,16 @@ streamlit run dashboard/streamlit/app.py
 ```
 
 One-liner: `python scripts/run_pipeline.py`
+
+**Orchestration:** [`run_pipeline.py`](scripts/run_pipeline.py) is the primary local runner. Optional Airflow DAG for scheduling — see [docs/orchestration.md](docs/orchestration.md).
+
+## Power BI (DA portfolio)
+
+Screenshots in [`dashboard/powerbi/screenshots/`](dashboard/powerbi/screenshots/) are the official DA deliverable (no `.pbix` required in git). Optional Desktop build: [dashboard/powerbi/BUILD_GUIDE.md](dashboard/powerbi/BUILD_GUIDE.md).
+
+```bash
+python scripts/export_powerbi_csvs.py   # refresh KPI CSVs for Power BI
+```
 
 ## Stack
 
@@ -91,7 +101,7 @@ Full report: [docs/business_insights.md](docs/business_insights.md)
 |---|---|
 | ![Categories](dashboard/powerbi/screenshots/03_category_mix.png) | ![Delivery](dashboard/powerbi/screenshots/04_delivery_reviews.png) |
 
-Power BI setup: [dashboard/powerbi/README.md](dashboard/powerbi/README.md)
+Power BI setup: [dashboard/powerbi/README.md](dashboard/powerbi/README.md) — screenshots are the DA portfolio artifact; optional `.pbix` via [BUILD_GUIDE.md](dashboard/powerbi/BUILD_GUIDE.md).
 
 ## ML results
 

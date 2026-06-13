@@ -15,13 +15,14 @@ python -m venv .venv && .venv\Scripts\activate
 pip install -r requirements.txt
 docker build -t olist-dbt -f dbt/Dockerfile .
 
-python ingestion/load_bronze.py
-python scripts/run_dbt.py run
-python scripts/run_dbt.py test
-python ml/train_churn.py
+python scripts/run_pipeline.py
+
+# Optional Airflow UI: docker compose --profile airflow up -d
 
 streamlit run dashboard/streamlit/app.py
 # Or: docker compose up -d streamlit  -> http://localhost:8502
+
+See [orchestration.md](orchestration.md) for Airflow vs run_pipeline.py.
 ```
 
 ## Ports

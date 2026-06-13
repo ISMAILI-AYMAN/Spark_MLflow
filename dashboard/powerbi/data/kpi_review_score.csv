@@ -1,0 +1,5 @@
+delivery_bucket,order_count,avg_review_score,avg_delivery_delay_days
+on_time_or_early,89443,4.29,-12.53
+1_3_days_late,1852,3.29,1.83
+4_7_days_late,1748,2.11,5.52
+8_plus_days_late,2781,1.7,19.45

@@ -34,8 +34,8 @@ flowchart TB
 
 ## Orchestration
 
-- **Local:** `python scripts/run_pipeline.py`
-- **Airflow:** `airflow/dags/olist_daily_refresh.py` (daily schedule)
+- **Local / dev:** `python scripts/run_pipeline.py` — see [orchestration.md](orchestration.md)
+- **Scheduled:** Airflow DAG `olist_daily_refresh` — `docker compose --profile airflow up -d`
 
 ## Infrastructure
 
