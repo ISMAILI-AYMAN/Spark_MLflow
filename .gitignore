@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+
+# Data (download from Kaggle — see data/raw/olist/README.md)
+data/raw/olist/*.csv
+data/raw/*.zip
+
+# dbt
+dbt/target/
+dbt/dbt_packages/
+dbt/logs/
+dbt/profiles.yml
+
+# MLflow
+mlflow.db
+mlruns/
+mlartifacts/
+
+# Airflow
+airflow/logs/
+airflow/airflow.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Power BI (large files — commit screenshots only)
+dashboard/powerbi/*.pbix
+
+# Jupyter
+.ipynb_checkpoints/

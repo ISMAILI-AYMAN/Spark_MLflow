@@ -1,0 +1,3 @@
+select customer_state, avg_delivery_delay_days, late_delivery_pct
+from gold.kpi_delivery_performance
+order by avg_delivery_delay_days desc;

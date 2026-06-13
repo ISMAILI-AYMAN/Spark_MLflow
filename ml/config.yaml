@@ -1,0 +1,9 @@
+churn_threshold_days: 90
+test_size: 0.2
+random_state: 42
+cv_folds: 5
+mlflow_experiment: olist_churn
+
+models:
+  - logistic_regression
+  - xgboost

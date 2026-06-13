@@ -1,0 +1,28 @@
+name: olist_analytics
+version: 1.0.0
+config-version: 2
+
+profile: olist_analytics
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+seed-paths: ["seeds"]
+
+target-path: target
+clean-targets:
+  - target
+  - dbt_packages
+
+models:
+  olist_analytics:
+    bronze:
+      +schema: bronze
+      +materialized: view
+    silver:
+      +schema: silver
+      +materialized: view
+    gold:
+      +schema: gold
+      +materialized: table
